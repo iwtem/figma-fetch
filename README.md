@@ -1,16 +1,10 @@
 # GitHub action for exporting Figma components
 
-> **NOTE**: This repository is no longer maintained.
-
-[![npm version](https://img.shields.io/npm/v/@iwtem/figma-action.svg)](https://www.npmjs.org/package/@iwtem/figma-action)
-
-A [GitHub action](https://github.com/features/actions) that will export [Figma](https://figma.com/) components from design files to your repository.
-
 ## Usage
 
 **Example workflow**
 
-```workflow
+```yaml
 name: Export SVG from Figma
 on: [push]
 jobs:
@@ -18,7 +12,7 @@ jobs:
     name: Figma Export
     runs-on: ubuntu-latest
     steps:
-      - uses: iwtem/figma-action@v1.0.0-alpha.3
+      - uses: iwtem/figma-fetch@master
         with:
           args: "format=svg outputDir=./build/"
         env:
@@ -45,6 +39,7 @@ This is the file url that you would like to export from. The action will search 
 * `format` – The export format for exporting from Figma. Options are `svg`, `jpg`, `png`. Default is `jpg`
 * `outputDir` – Where you would like the exported files to live. Default is `./build/`
 * `scale` – When choosing an image format `jpg` or `png` this is the export scale between `0.01` and `4` that will allow you to scale the image. Default is `1`.
+* `maxFetchSize` – 一次最多获取多少个 figma 组件的信息，默认 500. 
 
 ### Output
 
