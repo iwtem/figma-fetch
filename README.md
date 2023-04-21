@@ -1,51 +1,51 @@
-# GitHub action for exporting Figma components
+# 用于导出 Figma Component 的 GitHub Action
 
-## Usage
+## 使用
 
-**Example workflow**
+### GitHub Workflow 示例
 
 ```yaml
-name: Export SVG from Figma
+name: Export SVG Icon from Figma
 on: [push]
 jobs:
   all:
     name: Figma Export
     runs-on: ubuntu-latest
     steps:
-      - uses: iwtem/figma-fetch@master
+      - uses: iwtem/figma-fetch@latest
         with:
-          args: "format=svg outputDir=./build/"
+          args: 'format=svg outputDir=./build/'
         env:
-          FIGMA_FILE_URL: "https://www.figma.com/file/ZFjrph2HUwFK8Q3uEtJIu1PT/yourfilename"
+          FIGMA_FILE_URL: 'https://www.figma.com/file/ZFjrph2HUwFK8Q3uEtJIu1PT/yourfilename'
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
 ```
 
-### Variables
+### Action secrets and variables
 
 **Secrets**
 
-`FIGMA_TOKEN` **(required)**
+`FIGMA_TOKEN` **(必需)**
 
-This token is used to access the [Figma API](https://www.figma.com/developers/docs#access-tokens). It's required to generate one so this action will work. It's recommended to set the token in a [secret token](https://help.github.com/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) in your repository.
+此令牌用于访问 [Figma API](https://www.figma.com/developers/docs#access-tokens)。 建议在 GitHub 仓库的 [secret token](https://help.github.com/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) 中设置令牌。
 
-**env variables**
+**Variables**
 
-`FIGMA_FILE_URL` **(required)**
+`FIGMA_FILE_URL` **(必需)**
 
-This is the file url that you would like to export from. The action will search the file for [components](https://help.figma.com/article/66-components) and export them with your configurations.
+Figma 页面地址，用于下载该页面中的 [components](https://help.figma.com/article/66-components) 。
 
-**Workflow args (optional)**
+### Action arguments
 
-* `format` – The export format for exporting from Figma. Options are `svg`, `jpg`, `png`. Default is `jpg`
-* `outputDir` – Where you would like the exported files to live. Default is `./build/`
-* `scale` – When choosing an image format `jpg` or `png` this is the export scale between `0.01` and `4` that will allow you to scale the image. Default is `1`.
-* `maxFetchSize` – 一次最多获取多少个 figma 组件的信息，默认 500. 
+- `format` – 从 Figma 导出的文件格式。 选项有 `svg`、`jpg`、`png`。 默认为 `jpg`。
+- `outputDir` – 导出的文件所在的位置。 默认是`./build/`。
+- `scale` – 当图像格式 `jpg` 或 `png` 时，图片的缩放比例，可配置范围为 `0.01` - `4`，默认为 `1`。
+- `maxFetchSize` – 一次最多获取多少个 figma 组件的信息，默认 `500`.
 
-### Output
+### 输出
 
-The output of this action lives in `./build/` by default, but can be configured. In addition to the files exported you will see a `data.json` file exported. This contains information about the exported components mapped by component `id`.
+默认输出位于 `./build/` 中，但可以配置。 除了导出的文件之外，您还会看到导出的 `data.json` 文件。 这包含有关由组件 `id` 映射的导出组件的信息。
 
-The directory will look like this:
+该目录将如下所示：
 
 ```
 ./outputDir/
@@ -54,20 +54,20 @@ The directory will look like this:
   └── data.json
 ```
 
-The data.json file will look like this:
+`data.json` 文件如下所示：
 
 ```json5
 {
-  "0:639": {
-    "name": "plus", // component name
-    "id": "0:639", // component figma id
-    "key": "89696b0b52493acc8692546ac829bd4e334c63a2", // component global figma id
-    "file": "FP7lqd1V00LUaT5zvdklkkZr", // figma file key
-    "description": "keywords: add, new, more", // figma component description
-    "width": 12, // width of the component frame
-    "height": 16, // height of the component frame
-    "image": "https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1/6d/1234" // aws URL for the exported file
-  }
+  '0:639': {
+    name: 'plus', // component name
+    id: '0:639', // component figma id
+    key: '89696b0b52493acc8692546ac829bd4e334c63a2', // component global figma id
+    file: 'FP7lqd1V00LUaT5zvdklkkZr', // figma file key
+    description: 'keywords: add, new, more', // figma component description
+    width: 12, // width of the component frame
+    height: 16, // height of the component frame
+    image: 'https://s3-us-west-2.amazonaws.com/figma-alpha-api/img/1/6d/1234', // aws URL for the exported file
+  },
 }
 ```
 
