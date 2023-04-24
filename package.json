@@ -12,6 +12,7 @@
     "build": "ncc build entrypoint.js --license licenses.txt"
   },
   "dependencies": {
+    "@actions/core": "^1.10.0",
     "figma-js": "^1.6.0",
     "fs-extra": "^7.0.0",
     "got": "^8.3.0",

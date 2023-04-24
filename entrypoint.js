@@ -1,24 +1,20 @@
+const core = require('@actions/core');
 const got = require('got');
 const { ensureDir, writeFile } = require('fs-extra');
 const { join, resolve } = require('path');
 const Figma = require('figma-js');
-const { FIGMA_TOKEN, FIGMA_FILE_URL } = process.env;
 const PQueue = require('p-queue');
 const sanitize = require('sanitize-filename');
 
-const options = {
-  format: 'svg',
-  outputDir: './build/',
-  scale: '1',
-  maxFetchSize: 500,
-};
+const FIGMA_TOKEN = core.getInput('FIGMA_TOKEN');
+const FIGMA_FILE_URL = core.getInput('FIGMA_FILE_URL');
 
-for (const arg of process.argv.slice(2)) {
-  const [param, value] = arg.split('=');
-  if (options[param]) {
-    options[param] = value;
-  }
-}
+const options = {
+  format: core.getInput('format') || 'svg',
+  outputDir: core.getInput('outputDir') || './build/',
+  scale: core.getInput('scale') || 1,
+  maxFetchSize: core.getInput('maxFetchSize') || 500,
+};
 
 if (!FIGMA_TOKEN) {
   throw Error('Cannot find FIGMA_TOKEN in process!');
@@ -147,7 +143,7 @@ client
     );
   })
   .catch(error => {
-    throw Error(`Error fetching components from Figma: ${error}`);
+    core.setFailed(`Error fetching components from Figma: ${error.message}`);
   });
 
 function queueTasks(tasks, options) {
