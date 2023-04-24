@@ -1,5 +1,7 @@
 # 用于导出 Figma Component 的 GitHub Action
 
+用于导出 Figma File 中 SVG/PNG/JPG 的 GitHub Action
+
 ## 使用
 
 ### GitHub Workflow 示例

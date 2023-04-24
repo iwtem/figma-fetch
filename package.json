@@ -1,5 +1,5 @@
 {
-  "name": "@iwtem/figma-fetch",
+  "name": "figma-fetch",
   "version": "1.0.0",
   "description": "GitHub action for exporting figma components.",
   "main": "index.js",
@@ -8,7 +8,8 @@
   "license": "MIT",
   "repository": "https://github.com/iwtem/figma-fetch",
   "scripts": {
-    "start": "node entrypoint.js"
+    "start": "node entrypoint.js",
+    "build": "ncc build entrypoint.js --license licenses.txt"
   },
   "dependencies": {
     "figma-js": "^1.6.0",
@@ -18,6 +19,7 @@
     "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.36.1",
     "prettier": "^2.8.7"
   }
 }

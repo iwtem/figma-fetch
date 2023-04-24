@@ -1,0 +1,24 @@
+name: 'figma-fetch'
+description: '用于导出 Figma Component 的 GitHub Action。'
+
+branding:
+  icon: 'film'
+  color: 'purple'
+
+inputs:
+  figma_token:
+    description: '此令牌用于访问 Figma API，建议在 GitHub 仓库的 secret token 中设置令牌。'
+    required: true
+  figma_file_url:
+    description: 'Figma 页面地址，用于下载该页面中的 components 。'
+    required: true
+
+#outputs:
+#  pdfs:
+#    description: List of exported pdfs
+#  outDir:
+#    description: Output directory for all emitted pdf files
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
