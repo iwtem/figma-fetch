@@ -1,6 +1,6 @@
 {
   "name": "figma-fetch",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "GitHub action for exporting figma components.",
   "main": "index.js",
   "keywords": ["github", "action", "figma", "design", "image"],
