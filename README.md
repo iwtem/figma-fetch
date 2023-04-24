@@ -1,10 +1,8 @@
-# 用于导出 Figma Component 的 GitHub Action
+# figma-fetch
 
 用于导出 Figma File 中 SVG/PNG/JPG 的 GitHub Action
 
-## 使用
-
-### GitHub Workflow 示例
+## 🚀 基本使用
 
 ```yaml
 name: Export SVG Icon from Figma
@@ -75,4 +73,4 @@ Figma 页面地址，用于下载该页面中的 [components](https://help.figma
 
 ## License
 
-[MIT](./LICENSE) &copy; [GitHub](https://github.com/)
+The scripts and documentation in this project are released under the [MIT License](LICENSE)
