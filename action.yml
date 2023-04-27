@@ -13,12 +13,6 @@ inputs:
     description: 'Figma 页面地址，用于下载该页面中的 components 。'
     required: true
 
-#outputs:
-#  pdfs:
-#    description: List of exported pdfs
-#  outDir:
-#    description: Output directory for all emitted pdf files
-
 runs:
   using: 'docker'
   image: 'Dockerfile'

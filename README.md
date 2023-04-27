@@ -7,17 +7,17 @@
 ```yaml
 name: Export SVG Icon from Figma
 on: [push]
+
 jobs:
   all:
-    name: Figma Export
-    runs-on: ubuntu-latest
-    steps:
-      - uses: iwtem/figma-fetch@latest
-        with:
-          args: 'format=svg outputDir=./build/'
-        env:
-          FIGMA_FILE_URL: 'https://www.figma.com/file/ZFjrph2HUwFK8Q3uEtJIu1PT/yourfilename'
-          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+    - name: Figma Action
+      uses: iwtem/figma-fetch@v2.0.2
+      with:
+        outputDir: ./src/
+        format: svg
+        maxFetchSize: 500
+        FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        FIGMA_FILE_URL: ${{ secrets.FIGMA_FILE_URL }}
 ```
 
 ### Action secrets and variables
