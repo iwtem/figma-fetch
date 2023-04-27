@@ -107,9 +107,9 @@ client
   })
   .then(components => {
     console.log('Writing data.json file...');
-    return ensureDir(join(options.outputDir))
+    return ensureDir(join(process.env.GITHUB_WORKSPACE, options.outputDir))
       .then(() =>
-        writeFile(resolve(options.outputDir, 'data.json'), JSON.stringify(components), 'utf8')
+        writeFile(resolve(process.env.GITHUB_WORKSPACE, options.outputDir, 'data.json'), JSON.stringify(components), 'utf8')
       )
       .then(() => components);
   })
