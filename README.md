@@ -11,11 +11,12 @@ on: [push]
 jobs:
   all:
     - name: Figma Action
-      uses: iwtem/figma-fetch@v2.0.2
+      uses: iwtem/figma-fetch@v2.1.0
       with:
         outputDir: ./src/
         format: svg
         maxFetchSize: 500
+        concurrency: 5
         FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
         FIGMA_FILE_URL: ${{ secrets.FIGMA_FILE_URL }}
 ```
@@ -39,7 +40,8 @@ Figma 页面地址，用于下载该页面中的 [components](https://help.figma
 - `format` – 从 Figma 导出的文件格式。 选项有 `svg`、`jpg`、`png`。 默认为 `jpg`。
 - `outputDir` – 导出的文件所在的位置。 默认是`./build/`。
 - `scale` – 当图像格式 `jpg` 或 `png` 时，图片的缩放比例，可配置范围为 `0.01` - `4`，默认为 `1`。
-- `maxFetchSize` – 一次最多获取多少个 figma 组件的信息，默认 `500`.
+- `maxFetchSize` – 一次最多获取多少个 figma 组件的信息，默认 `500`，如果数量过多会导致请求失败.
+- `concurrency` – 下载组件的并发数，即同时下载几个组件，默认 `3`.
 
 ### 输出
 

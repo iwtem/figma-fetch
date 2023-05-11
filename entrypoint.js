@@ -14,6 +14,7 @@ const options = {
   outputDir: core.getInput('outputDir') || './build/',
   scale: core.getInput('scale') || 1,
   maxFetchSize: core.getInput('maxFetchSize') || 500,
+  concurrency: 3,
 };
 
 if (!FIGMA_TOKEN) {
@@ -139,7 +140,8 @@ client
               )
             );
           });
-      })
+      }),
+      { concurrency: options.concurrency }
     );
   })
   .catch(error => {
@@ -147,7 +149,7 @@ client
   });
 
 function queueTasks(tasks, options) {
-  const queue = new PQueue(Object.assign({ concurrency: 3 }, options));
+  const queue = new PQueue(options);
   for (const task of tasks) {
     queue.add(task);
   }
