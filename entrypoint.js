@@ -48,7 +48,7 @@ client
         const { name, id } = c;
         const { description = '', key } = data.components[c.id];
         const { width, height } = c.absoluteBoundingBox;
-        const filename = `${sanitize(name).toLowerCase()}.${options.format}`;
+        const filename = `${sanitize(name)}.${options.format}`;
 
         components[id] = {
           name,
